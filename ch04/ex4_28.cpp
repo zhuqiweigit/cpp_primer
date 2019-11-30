@@ -5,12 +5,15 @@ using std::vector;
 using std::cout;
 using std::endl;
 int main() {
-    vector<int> vec{1,2,3,4,5,6,7,8,9};
-    for(auto &item : vec){
-        item = item % 2 == 1 ? item * 2 : item;
-    }
-    for(auto iter = vec.begin(); iter != vec.end(); iter++){
-        cout << *iter << endl;
-    }
+    int a;
+    double b;
+    short c;
+    float d;
+    int arr[10];
+    int* e;
+    cout << sizeof a << " " << sizeof b << " " << sizeof c << " " << sizeof d << " " << sizeof e << " " << sizeof arr << endl;
+    int x[10], *p = x;
+    cout << sizeof(x) << " " << sizeof(*x)<< endl;
+    cout << sizeof(p) << " " << sizeof(*p) << endl;
     return 0;
 }
