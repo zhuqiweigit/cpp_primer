@@ -3,10 +3,12 @@
 #include <string>
 #include <iostream>
 using std::istream; using std::ostream;
-struct Sales_data{
+class Sales_data{
+private:
     std::string bookNo;
     unsigned units_sold = 0;
     double sum = 0;
+public:
     Sales_data() = default;
     Sales_data(const std::string &s):bookNo(s){};
     Sales_data(const std::string &s, unsigned u, double sum): bookNo(s), units_sold(u), sum(sum){};
@@ -15,6 +17,10 @@ struct Sales_data{
     }
     std::string isbn() const{ return bookNo;}
     Sales_data & conbine(const Sales_data& );
+
+    friend Sales_data add(const Sales_data &a, const Sales_data &b);
+    friend std::istream& read(std::istream &is, Sales_data &data);
+    friend ostream& print(ostream &os, const Sales_data& data);
 
 };
 Sales_data& Sales_data::conbine(const Sales_data &rhs) {
