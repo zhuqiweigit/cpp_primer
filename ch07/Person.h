@@ -9,7 +9,7 @@ private:
     std::string address;
 public:
     Person(const string &name, const string &address): name(name), address(address){}
-    Person(std::istream &is){
+    explicit Person(std::istream &is){
         is >> name >> address;
     }
     Person():name("XiaoMing"), address("zju"){}

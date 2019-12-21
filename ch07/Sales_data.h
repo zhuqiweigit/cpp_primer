@@ -2,7 +2,7 @@
 #define SALES_DATA_H
 #include <string>
 #include <iostream>
-using std::istream; using std::ostream;
+using std::istream; using std::ostream; using std::cin; using std::cout; using std::endl;
 class Sales_data{
 private:
     std::string bookNo;
@@ -10,10 +10,14 @@ private:
     double sum = 0;
 public:
     Sales_data() = default;
-    Sales_data(const std::string &s):bookNo(s){};
-    Sales_data(const std::string &s, unsigned u, double sum): bookNo(s), units_sold(u), sum(sum){};
+    Sales_data(const std::string &s, unsigned u, double sum): bookNo(s), units_sold(u), sum(sum){
+        cout << "Sales_data(const std::string &s, unsigned u, double sum) 函数体" << endl;
+    }
     Sales_data(std::istream &is){
         is >> bookNo >> units_sold >> sum;
+    }
+    Sales_data(const std::string &s):Sales_data(s, 0, 0){
+        cout << "Sales_data(const std::string &s) 函数体" << endl;
     }
     std::string isbn() const{ return bookNo;}
     Sales_data & conbine(const Sales_data& );
