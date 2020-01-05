@@ -2,25 +2,25 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <functional>
 using namespace std;
-
+using namespace std::placeholders;
 void elimDups(vector<string>& words){
     sort(words.begin(), words.end());
     auto pos = unique(words.begin(), words.end());
     words.erase(pos, words.end());
+}
+bool findSize(const string& s, int sz){
+    return s.size() >= sz;
 }
 void biggies(vector<string>& words, vector<string>::size_type sz){
     elimDups(words);
     stable_sort(words.begin(), words.end(), [](const string &a, const string &b)->bool{
         return a.size() < b.size();
     });
-    auto wc = find_if(words.begin(), words.end(), [sz](const string& a)->bool{
-        return a.size() >= sz;
-    });
-    int cnt = count_if(words.begin(), words.end(), [sz](const string& a)->bool{
-        if(a.size() >= sz) return true;
-        else return false;
-    });
+
+    auto f = bind(findSize, _1, sz);
+    auto wc = find_if(words.begin(), words.end(), f);
 
     cout << words.end() - wc << endl;
     for_each(wc, words.end(), [](const string& a){
@@ -29,19 +29,10 @@ void biggies(vector<string>& words, vector<string>::size_type sz){
 }
 
 
-void biggies2(vector<string>& words, vector<string>::size_type sz){
-    elimDups(words);
-    auto wc = partition(words.begin(), words.end(), [sz](const string& a)->bool{
-        return a.size() >= sz;
-    });
-    cout << wc - words.begin() << endl;
-    for_each(words.begin(), wc, [](const string& a){
-        cout << a << endl;
-    });
-}
-
 
 int main(){
-
+    vector<string> vec{"a", "b", "ccccccc", "c", "a", "ooo", "ada", "000", "ajsdkljsa", "asd121", "000000"};
+    elimDups(vec);
+    biggies(vec, 5);
     return 0;
 }
