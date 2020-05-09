@@ -12,10 +12,13 @@ private:
     double sum = 0.0;
     SalesData& operator+=(const SalesData &);
     SalesData& operator+(const SalesData &);
-
 public:
     SalesData(const std::string &bookNo, unsigned unitSold, double sum):bookNo(bookNo), unitSold(unitSold), sum(sum){ }
     SalesData(const std::string &bookNo):SalesData(bookNo, 0, 0){}
+
+public:
+    explicit operator std::string()const { return bookNo;}
+    explicit operator double()const {return sum;}
 };
 
 std::istream& operator >>(std::istream& is, SalesData& indata){
