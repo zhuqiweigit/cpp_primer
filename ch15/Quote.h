@@ -50,7 +50,7 @@ public:
     My_quote() = default;
     My_quote(const std::string &bookNo, double p, std::size_t qty, double discount, std::size_t max_qty):Bulk_quote(bookNo, p, qty, discount), max_qty(max_qty){}
 
-    virtual double net_price(std::size_t n) const{
+    virtual double net_price(std::size_t n) const override {
         if(n < max_qty)
             return Bulk_quote::net_price(n);
         else{
@@ -58,7 +58,7 @@ public:
         }
     }
 
-    virtual void debug(std::ostream &os) const{
+    virtual void debug(std::ostream &os) const override {
         Bulk_quote::debug(os);
         os << " max_qty" << max_qty;
     }
